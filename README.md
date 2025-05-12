@@ -1,4 +1,4 @@
-# 🚀 มารู้จักกับ `uv` – Python package and project manager สายฟ้าแลบจากโลก Rust
+# 🚀 มารู้จักกับ `uv` – Python package and project manager สายฟ้าแลบจากโลก Rust!
 
 > "ถ้า pip คือม้า UV ก็เป็นรถ F1!"
 > เพราะเขาเคลมว่าเร็วกว่า pip ธรรมดา **10x** และบางกรณีถึง **100x** 😱
@@ -48,7 +48,7 @@ uv self update
 
 ---
 
-## 🎬 ลองสร้างโปรเจกต์แรกด้วย `uv` กัน
+## 🎬 ลองสร้างโปรเจกต์แรกด้วย `uv` กันเถอะ!
 
 ```bash
 uv init example
@@ -56,9 +56,9 @@ cd example
 ls
 ```
 
-จะได้โครงสร้างโปรเจกต์สวยๆ แบบนี้:
+จะได้โครงสร้างโปรเจกต์ แบบนี้:
 
-```bash
+```
 📁 example
 ├── 📘 README.md
 ├── 🐍 main.py
@@ -69,7 +69,7 @@ ls
 
 ---
 
-## 🧪 สร้าง Virtual Env เร็วปานสายฟ้า
+## 🧪 สร้าง Virtual Env เร็วปานสายฟ้า!
 
 ```bash
 uv venv
@@ -88,17 +88,17 @@ source .venv/bin/activate
 
 ---
 
-## ⚡ ติดตั้ง FastAPI แบบวาร์ป
+## ⚡ ทดลองติดตั้ง FastAPI เพื่อเช็คการทำงาน
 
 ```bash
 uv add "fastapi[standard]"
 ```
 
-ภายในพริบตา คุณจะได้ package เพียบ พร้อมใช้งานทันที 🎉
+ภายในพริบตา เราจะได้ package พร้อมใช้งานทันที 🎉
 
 ---
 
-## 🔍 ลองแอบส่อง `pyproject.toml` ดูสิ ฟีลเดียวกับ npm เลย
+## 🔍 ลองแอบส่องดู `pyproject.toml` ดูสิ อารมณ์เดียวกับใช้ npm ของ node.js
 
 ```toml
 [project]
@@ -112,17 +112,17 @@ dependencies = [
 ]
 ```
 
-> ใช่เลย! เหมือน `package.json` เวอร์ชัน Python 😎
+> `package.json` เวอร์ชัน Python 5555+
 
 ---
 
-## 🧪 Benchmark กันชัดๆ Python venv vs UV venv
+## 🧪 ทดลอง Benchmark ความเร็วการสร้าง .venv กันชัดๆ Python venv vs UV venv
 
 ```bash
 python main.py
 ```
 
-### โค้ดเบาๆ ไม่ต้องใช้หัว
+### สคริปต์สำหรับใช้ในการ benchmark นี้
 
 ```python
 import subprocess
@@ -131,10 +131,10 @@ import shutil
 import os
 import sys
 import platform
-
+  
 
 def create_venv_with_uv(path=".venv_test_uv"):
-    # Get Python interpreter info
+
     python_version = (
         f"{sys.version_info.major}.{sys.version_info.minor}.{sys.version_info.micro}"
     )
@@ -142,23 +142,22 @@ def create_venv_with_uv(path=".venv_test_uv"):
     print(f"Using CPython {python_version} interpreter at: {python_path}")
     print(f"Creating virtual environment at: {path}")
 
-    # Determine activation command based on platform
     if platform.system() == "Windows":
         activate_cmd = f"{path}\\Scripts\\activate"
     else:
         activate_cmd = f"{path}/bin/activate"
     print(f"Activate with: {activate_cmd}")
-
+  
     start = time.perf_counter()
     subprocess.run(["uv", "venv", path], check=True)
     duration = time.perf_counter() - start
     shutil.rmtree(path, ignore_errors=True)
     return duration
-
-
+  
+  
 
 def create_venv_with_python(path=".venv_test_python"):
-    shutil.rmtree(path, ignore_errors=True)  # Clean up before create
+    shutil.rmtree(path, ignore_errors=True) 
     start = time.perf_counter()
     python_cmd = "python3" if platform.system() != "Windows" else "python"
     try:
@@ -169,26 +168,26 @@ def create_venv_with_python(path=".venv_test_python"):
     except subprocess.CalledProcessError as e:
         print(f"❌ Failed to create Python venv: {e}")
         return None
-
-
+  
+  
 
 def main():
     print("Benchmarking virtual environment creation...")
-
+  
 
     uv_times = []
     py_times = []
+  
 
-
-    rounds = 3  # You can increase for more stable averages
-
+    rounds = 3 
+  
 
     for i in range(rounds):
         print(f"\nRound {i+1}:")
         uv_time = create_venv_with_uv()
         print(f"  uv venv       : {uv_time:.3f} seconds")
         uv_times.append(uv_time)
-
+  
 
         try:
             py_time = create_venv_with_python()
@@ -196,18 +195,18 @@ def main():
             py_times.append(py_time)
         except Exception:
             break
-
+  
 
     if py_times:
         avg_uv = sum(uv_times) / len(uv_times)
         avg_py = sum(py_times) / len(py_times)
-
+  
 
         print("\n📊 Average results:")
         print(f"  uv venv       : {avg_uv:.3f} sec")
         print(f"  python -m venv: {avg_py:.3f} sec")
-
-
+  
+  
 
 if __name__ == "__main__":
     main()
@@ -256,15 +255,5 @@ Activate with: .venv_test_uv\Scripts\activate
 ```
 
 **ต่างกันเกือบ 200 เท่า!**
-ใครสาย Productivity ต้องลองแล้วล่ะ 🔧⚡
+ใครสาย Productivity ต้องลอง 🔧⚡
 
----
-
-## 💬 สรุปสั้นๆ
-
-✅ ติดตั้งง่าย
-✅ ใช้งานไว
-✅ ประสบการณ์เหมือนใช้ npm
-✅ เหมาะกับสาย Dev ยุคใหม่ที่ไม่ชอบรอนาน
-
-ลองเลยเถอะ... แล้วคุณจะไม่อยากกลับไปใช้ pip อีกต่อไป 😆
